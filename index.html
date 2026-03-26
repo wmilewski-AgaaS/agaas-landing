@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring AgaaS — AI Agents for IT Operations</title>
+    <meta name="description" content="Spring AgaaS builds AI agents for IT Operations teams. Incident analysis, runbook generation, and autonomous IT automation — built for operators, not developers.">
+    <meta property="og:title" content="Spring AgaaS — AI Agents for IT Operations">
+    <meta property="og:description" content="Autonomous AI agents built for IT Operations teams. Simple to deploy. Practical to use.">
+    <meta property="og:url" content="https://springagents.tech">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy:       #0a0f1e;
+            --navy-mid:   #111827;
+            --navy-light: #1e2a3a;
+            --navy-border:#1f3050;
+            --blue:       #3b82f6;
+            --blue-light: #60a5fa;
+            --yellow:     #fbbf24;
+            --text:       #e2e8f0;
+            --text-dim:   #94a3b8;
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--navy);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Animated grid background — like a network topology map */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridDrift 20s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
+
+        /* Glowing orbs in the background */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            animation: orbPulse 6s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px; height: 500px;
+            background: var(--blue);
+            top: -100px; left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px; height: 400px;
+            background: var(--yellow);
+            bottom: -80px; right: -80px;
+            animation-delay: 3s;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% { opacity: 0.10; transform: scale(1); }
+            50%       { opacity: 0.18; transform: scale(1.1); }
+        }
+
+        /* Main layout */
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .logo-spring {
+            color: var(--yellow);
+            text-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+        }
+
+        .logo-agaas {
+            color: var(--blue-light);
+            margin-left: 6px;
+            text-shadow: 0 0 40px rgba(96, 165, 250, 0.5);
+        }
+
+        .logo-tagline {
+            font-size: 12px;
+            color: var(--blue-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.6;
+            margin-bottom: 56px;
+        }
+
+        /* Lightning bolt icon */
+        .bolt {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8));
+            animation: boltPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes boltPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)); transform: scale(1); }
+            50%       { filter: drop-shadow(0 0 40px rgba(96, 165, 250, 0.9)); transform: scale(1.05); }
+        }
+
+        /* Main headline */
+        .headline {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Subheadline */
+        .subheadline {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-dim);
+            line-height: 1.6;
+            max-width: 540px;
+            margin-bottom: 48px;
+        }
+
+        /* CTA badge */
+        .cta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(251, 191, 36, 0.08);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--yellow);
+            letter-spacing: 0.5px;
+            margin-bottom: 48px;
+        }
+
+        .cta-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--yellow);
+            border-radius: 50%;
+            animation: dotBlink 1.5s ease-in-out infinite;
+            box-shadow: 0 0 8px var(--yellow);
+        }
+
+        @keyframes dotBlink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        /* Agent pills — shows what the agents do */
+        .agents {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 56px;
+        }
+
+        .agent-pill {
+            padding: 8px 18px;
+            background: var(--navy-light);
+            border: 1px solid var(--navy-border);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .agent-pill span {
+            margin-right: 6px;
+        }
+
+        /* X link */
+        .x-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            padding: 10px 20px;
+            border: 1px solid var(--navy-border);
+            border-radius: 8px;
+        }
+
+        .x-link:hover {
+            color: var(--blue-light);
+            border-color: var(--blue);
+        }
+
+        .x-icon {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 24px;
+            font-size: 11px;
+            color: var(--text-dim);
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+
+        <div class="logo">
+            <span class="logo-spring">Spring</span><span class="logo-agaas">AgaaS</span>
+        </div>
+        <p class="logo-tagline">Agent as a Service</p>
+
+        <span class="bolt">⚡</span>
+
+        <h1 class="headline">AI Agents for<br>IT Operations</h1>
+
+        <p class="subheadline">
+            Practical autonomous agents built for the people who keep infrastructure running.
+            No dev team required.
+        </p>
+
+        <div class="cta-badge">
+            <div class="dot"></div>
+            Agents hard at work
+        </div>
+
+        <div class="agents">
+            <div class="agent-pill"><span>🚨</span>Incident Analysis</div>
+            <div class="agent-pill"><span>📋</span>Runbook Generator</div>
+            <div class="agent-pill"><span>📝</span>Change Request Writer</div>
+            <div class="agent-pill"><span>🔍</span>Post-Incident Review</div>
+            <div class="agent-pill"><span>☁️</span>CloudOps Advisor</div>
+            <div class="agent-pill"><span>⚙️</span>IT Automation</div>
+        </div>
+
+        <a href="https://x.com/AGaaS_AI" target="_blank" class="x-link">
+            <span class="x-icon">𝕏</span>
+            Follow @AGaaS_AI for updates
+        </a>
+
+    </div>
+
+    <p class="footer">© 2026 Spring AgaaS · springagents.tech</p>
+
+</body>
+</html>
