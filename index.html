@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring AgaaS — AI Agents for IT Operations</title>
-    <meta name="description" content="Spring AgaaS builds AI agents for IT Operations teams. Incident analysis, runbook generation, and autonomous IT automation — built for operators, not developers.">
-    <meta property="og:title" content="Spring AgaaS — AI Agents for IT Operations">
+    <title>Spring Agents — AI Agents for IT Operations</title>
+    <meta name="description" content="Spring Agents builds AI agents for IT Operations teams. Incident analysis, runbook generation, and autonomous IT automation — built for operators, not developers.">
+    <meta property="og:title" content="Spring Agents — AI Agents for IT Operations">
     <meta property="og:description" content="Autonomous AI agents built for IT Operations teams. Simple to deploy. Practical to use.">
     <meta property="og:url" content="https://springagents.tech">
     <style>
@@ -205,6 +205,14 @@
             margin-right: 6px;
         }
 
+        /* Button row */
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         /* X follow button */
         .x-link {
             display: inline-flex;
@@ -225,6 +233,29 @@
         .x-link:hover {
             background: var(--white);
             box-shadow: 0 0 36px rgba(251, 191, 36, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* Email button */
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid var(--navy-border);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: 100px;
+            transition: all 0.2s ease;
+        }
+
+        .email-link:hover {
+            border-color: var(--blue-light);
+            color: var(--blue-light);
+            box-shadow: 0 0 24px rgba(96, 165, 250, 0.2);
             transform: translateY(-1px);
         }
 
@@ -464,7 +495,8 @@
             .cta-badge { font-size: 13px; padding: 12px 20px; margin-bottom: 28px; }
             .agents { gap: 8px; margin-bottom: 32px; }
             .agent-pill { font-size: 12px; padding: 7px 14px; }
-            .x-link { font-size: 14px; padding: 13px 24px; }
+            .x-link, .email-link { font-size: 14px; padding: 13px 24px; }
+            .button-row { gap: 10px; }
             .container { padding: 48px 20px 80px; }
             .orb-1 { width: 300px; height: 300px; }
             .orb-2 { width: 250px; height: 250px; }
@@ -486,9 +518,9 @@
     <div class="container">
 
         <div class="logo">
-            <span class="logo-spring">Spring</span><span class="logo-agaas">AgaaS</span>
+            <span class="logo-spring">Spring</span><span class="logo-agaas"> Agents</span>
         </div>
-        <p class="logo-tagline">Agent as a Service</p>
+        <p class="logo-tagline">AI Agents for IT Operations</p>
 
         <span class="bolt">⚡</span>
 
@@ -513,10 +545,15 @@
             <div class="agent-pill"><span>⚙️</span>IT Automation</div>
         </div>
 
-        <a href="https://x.com/SpringAgaaS" target="_blank" class="x-link">
-            <span class="x-icon">𝕏</span>
-            Follow @SpringAgaaS for updates
-        </a>
+        <div class="button-row">
+            <a href="https://x.com/SpringAgents" target="_blank" class="x-link">
+                <span class="x-icon">𝕏</span>
+                Follow @SpringAgents
+            </a>
+            <a href="mailto:info@springagents.tech" class="email-link">
+                ✉ info@springagents.tech
+            </a>
+        </div>
 
     </div>
 
